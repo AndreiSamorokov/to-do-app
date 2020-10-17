@@ -27,10 +27,17 @@ function TodosComponent() {
       }
 
       function completeTodo( index ){
-          const todosArray = [...todos];
+          let todosArray = [...todos]
           todosArray[index].isCompleted = !todosArray[index].isCompleted
           setTodos(todosArray)
       }
+
+      function deleteTodo(idx) {
+        let todosArray = [...todos];
+        todosArray.splice(idx, 1);
+        setTodos(todosArray);
+      }
+
   return (
     <div>
         <input 
@@ -53,6 +60,9 @@ function TodosComponent() {
                     {todo.isCompleted && <span>&#x2714;</span>}
                 </div>
                 <div className={todo.isCompleted ? "done" : ""}> { todo.todo } </div>
+                <div className="delete" onClick={() => deleteTodo(index)}>
+                    &#128465;
+                </div>
           </div>
           
       ))}
