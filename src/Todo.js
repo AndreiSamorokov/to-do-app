@@ -17,8 +17,32 @@ function TodosComponent() {
         }
       ]);
 
+      function createNewTodo( currentTodo ){
+        let todosArray = [...todos];
+        todosArray.push({
+            todo: currentTodo,
+            isCompleted: false
+        })
+        setTodos(todosArray);
+      }
   return (
     <div>
+        <input 
+            className="todo-input"
+            value = {currentTodo}
+            onChange = { e=> {
+                setCurrentTodo(e.target.value)
+            }}
+            onKeyPress = {e=>{
+                if(e.key === 'Enter'){
+                    createNewTodo(currentTodo);
+                    setCurrentTodo('');
+                }
+            }}
+
+            placeholder="Input anything"
+
+        />
       {todos.map((todo, index) => (
           <p> { todo.todo } </p>
       ))}
